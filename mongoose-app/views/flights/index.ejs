@@ -13,10 +13,19 @@
   <tbody>
     <% flights.forEach(function(f) { %>
         <tr>
-          <td><%= f.airline %></td>
-          <td><%= f.airport %></td>
-          <td><%= f.flightNo %></td>
-          <td><%= f.departs%></td>
+            <li>
+                <form 
+                action="/flights/<%= f.id %>?_method=DELETE" 
+                method="POST"
+                class="delete-form"
+                >
+                    <button type="submit">X</button>
+                </form>
+                <td><%= f.airline %></td>
+                <td><%= f.airport %></td>
+                <td><%= f.flightNo %></td>
+                <td><%= f.departs%></td>
+            </li>
         </tr>
     <% }) %>
   </tbody>

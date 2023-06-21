@@ -1,0 +1,12 @@
+<%- include('../partials/header') %>
+
+<h3>Edit Flight</h3>
+
+<form method="POST" action="/flights/<%= flight._id %>?_method=PUT">
+  <label for="airline">Airline:</label>
+  <input type="text" id="airline" name="airline" value="<%= flight.airline %>">
+
+  <button type="submit">Update Flight</button>
+</form>
+
+<%- include('../partials/footer') %>

@@ -5,7 +5,9 @@ module.exports = {
     index, 
     create,
     delete: deleteFlight,
-    update
+    update,
+    edit, 
+    show
 }
 
 function newFlight(req, res) {
@@ -42,9 +44,28 @@ async function deleteFlight(req, res) {
 async function update(req, res) {
     try {
       await Flight.findByIdAndUpdate(req.params.id, req.body, {new:true})
-      res.redirect(`/flights/${req.params.id}`);
+      res.redirect(`/flights`);
     }  catch (err) {
       res.render(`/flights/${req.params.id}/edit`, { errorMsg: err.message });
     }
 }
+
+async function edit(req, res) {
+  try {
+    const flight = await Flight.findById(req.params.id);
+    res.render('flights/edit', { flight });
+  } catch (err) {
+    res.render('flights', { errorMsg: err.message });
+  }
+}
+
+async function show(req, res) {
+  try {
+    const flight = await Flight.findById(req.params.id);
+    res.render('flights/show', { flight });
+  } catch(err) {
+    res.render('flights', { errorMsg: err.message });
+  }
+}
+
 
